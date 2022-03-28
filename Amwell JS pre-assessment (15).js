@@ -10,37 +10,37 @@
 // Converting to an Angular app or typescript is not considered a necessity here.
 // We're mostly interested in understanding how engineers can critique the code & suggest improvements.
 
-var ispnum = function(num) {
-    for(var i = 2; i < num; i++)
-      if  (num % i === 0) return false;
-    return num > 1;
+const isPrimaryNumber = function(num) {
+  for(var i = 2; i < num; i++)
+    if  (num % i === 0) return false;
+  return num > 1;
 };
 
-const fibonacci = (num) => {
-    if (num <= 1)return 1;
-  return fibonacci(num - 1) + fibonacci(num - 2);
+const fibonacciValidation = function(num) {
+  if (num <= 1) return 1;
+  return fibonacciValidation(num - 1) + fibonacciValidation(num - 2);
 };
 
-function nxtPrmFib(number) {
-    let r = 0;
-    let l = 1;
-    while (true) {
-        var fib = fibonacci(l);
-        console.log('fib', fib, number);
-        if (fib > number) {
-            if (ispnum(fib)) {
-                r = fib;
-                break;
-                } else {
-                    l = l + 1;    
-                    console.warn('bumping to ', fib);
-                }
-            } else {
-                l = l + 1;
-                console.warn('bumping to', fib);
-            }
+function nextPrimeAndFibonacci(number) {
+  let rightDelimiter = 0;
+  let leftDelimiter = 1;
+  while (true) {
+    let fibonacciNumber = fibonacciValidation(leftDelimiter);
+    console.log('fib', fibonacciNumber, number);
+    if (fibonacciNumber > number) {
+      if (isPrimaryNumber(fibonacciNumber)) {
+        rightDelimiter = fibonacciNumber;
+        break;
+      } else {
+        leftDelimiter += 1;    
+        console.warn('bumping to ', fibonacciNumber);
+      }
+    } else {
+      leftDelimiter += 1;
+      console.warn('bumping to', fibonacciNumber);
     }
-    console.warn('Next prime fib ', r);
+  }
+  console.warn('Next prime fib ', rightDelimiter);
 }
 
-nxtPrmFib(20);
+nextPrimeAndFibonacci(20);
